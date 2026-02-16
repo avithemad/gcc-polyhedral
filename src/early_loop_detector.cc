@@ -17,6 +17,9 @@
 #include "diagnostic.h"
 #include "tree-cfg.h"
 
+// Declare this to run with gcc as a plugin
+int plugin_is_GPL_compatible;
+
 
 /* Plugin information */
 static struct plugin_info early_loop_detector_info = {
