@@ -92,24 +92,18 @@ pass_early_loop_detect::report_loop_info(class loop *loop, int depth)
   
   /* Report number of basic blocks */
   fprintf(stderr, ", num_nodes=%u", loop->num_nodes);
-  
-  fprintf(stderr, "\n");
-  return;
+
+  auto_vec<edge> exits = get_loop_exit_edges(loop);
+
   /* Report loop exits */
-  if (loop->exits) {
-    fprintf(stderr, ", exits=[");
-    struct loop_exit *exit = loop->exits;
-    bool first = true;
-    do {
-      if (!first) fprintf(stderr, ", ");
-      fprintf(stderr, "bb%d->bb%d", 
-              exit->e->src->index, exit->e->dest->index);
-      first = false;
-      exit = exit->next;
-    } while (exit != loop->exits);
-    fprintf(stderr, "]");
+  fprintf(stderr, ", exits=[");
+  for (auto exit : exits) {
+    fprintf(stderr, "bb%d->bb%d", 
+            exit->src->index, exit->dest->index);
   }
-  
+  fprintf(stderr, "]");
+
+
   fprintf(stderr, "\n");
 }
 
