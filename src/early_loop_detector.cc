@@ -104,6 +104,10 @@ pass_early_loop_detect::report_loop_info(class loop *loop, int depth)
   fprintf(stderr, "]");
 
 
+  edge preheader_edge = loop_preheader_edge(loop);
+  if (preheader_edge)
+    fprintf(stderr, ", preheader=[bb%d->dest=bb%d]", preheader_edge->src->index, preheader_edge->dest->index);
+
   fprintf(stderr, "\n");
 }
 
@@ -146,6 +150,8 @@ pass_early_loop_detect::execute(function *fun)
   struct loops *loops = NULL;
   bool cleanup_loops = false;
   
+  loop_optimizer_init (LOOPS_NORMAL);
+
   /* Check if loops already exist (shouldn't at this point) */
   if (fun->x_current_loops) {
     fprintf(stderr, "[Early Loop Detector] WARNING: Loops already discovered!\n");

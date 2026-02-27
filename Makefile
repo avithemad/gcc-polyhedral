@@ -9,7 +9,7 @@ GCC_PLUGIN_DIR := /home/avinashd/cross/gcc-powerpc64le/install_x86/lib/gcc/x86_6
 
 # Compiler flags
 CXX = g++
-CXXFLAGS = -I$(GCC_PLUGIN_DIR)/include -fPIC -fno-rtti -O2 -Wall -g
+CXXFLAGS = -I$(GCC_PLUGIN_DIR)/include -fPIC -fno-rtti -O0 -Wall -g
 LDFLAGS = -shared
 
 all: $(PLUGIN_OBJECT)
