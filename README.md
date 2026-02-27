@@ -8,6 +8,20 @@ which is not so amenable for polyhedral tools.
 This project tries to build a better polyhedral framework for the GCC intermediate
 representation GIMPLE.
 
+# Build
+
+This is a simple plugin. Just running `make` will produce a shared object
+`early_loop_detector.so`.
+
+# Examples
+
+Some samples can be tried out in the `examples/` directory. To use this plugin
+with gcc,
+
+```
+gcc -fplugin=./early_loop_detector.so examples/matmul.c
+```
+
 # Roadmap
 
 1. Detect SCoPs and transform it into polyhedral representation.

@@ -5,7 +5,7 @@ PLUGIN_SOURCE = src/early_loop_detector.cc
 PLUGIN_OBJECT = $(PLUGIN_NAME).so
 
 # Get GCC plugin directory
-GCC_PLUGIN_DIR := /home/avinashd/cross/gcc-powerpc64le/install_x86/lib/gcc/x86_64-linux-gnu/16.0.1/plugin
+GCC_PLUGIN_DIR := $(shell g++ -print-file-name=plugin)
 
 # Compiler flags
 CXX = g++
@@ -15,6 +15,9 @@ LDFLAGS = -shared
 all: $(PLUGIN_OBJECT)
 
 $(PLUGIN_OBJECT): $(PLUGIN_SOURCE)
+	@echo CXX: $(CXX)
+	@echo CXXFLAGS: $(CXX)
+	@echo GCC_PLUGIN_DIR: $(GCC_PLUGIN_DIR)
 	$(CXX) $(CXXFLAGS) $(LDFLAGS) $< -o $@
 
 clean:
